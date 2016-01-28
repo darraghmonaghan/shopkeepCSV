@@ -13,13 +13,9 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
 
   ### Creating variables to pass to JSON object ###
   quantity_on_hand = row['quantity_on_hand'] != nil ? string_to_integer(row['quantity_on_hand']) : nil
-  
   price = row['price'] != nil ? currency_to_integer(row['price']) : nil
-  
   cost = row['cost'] != nil ? currency_to_integer(row['cost']) : nil
-
   id = string_to_integer(row['item id'])
-
   description = description_formatting(row['description'])
 
 
@@ -42,8 +38,6 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
       quantity_on_hand: quantity_on_hand,		## variable passed from ternary operator value
       modifiers: modifiers						## object passed in dependent on existence of modifiers
     }
-
-
 
 end)
 
