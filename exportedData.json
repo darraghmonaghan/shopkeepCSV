@@ -48,7 +48,7 @@
   },
   {
     "id": 2847224,
-    "description": "Orange Juice 48",
+    "description": "Orange Juice",
     "price": 68.57,
     "cost": null,
     "price_type": "system",
@@ -70,7 +70,7 @@
   },
   {
     "id": 2847225,
-    "description": "Milk 49",
+    "description": "Milk",
     "price": 70.0,
     "cost": 49.0,
     "price_type": "system",
@@ -81,7 +81,7 @@
   },
   {
     "id": 2847226,
-    "description": "Ciabatta 50",
+    "description": "Ciabatta",
     "price": 71.43,
     "cost": null,
     "price_type": "system",
@@ -92,7 +92,7 @@
   },
   {
     "id": 2847227,
-    "description": "baguette 51",
+    "description": "Baguette",
     "price": 0.0,
     "cost": null,
     "price_type": "open",
@@ -103,7 +103,7 @@
   },
   {
     "id": 2847228,
-    "description": "Sour Dough Boule 52",
+    "description": "Sour Dough Boule",
     "price": 74.29,
     "cost": null,
     "price_type": "system",
@@ -114,7 +114,7 @@
   },
   {
     "id": 2847244,
-    "description": "Whole Coffee Cake 68",
+    "description": "Whole Coffee Cake",
     "price": 0.0,
     "cost": null,
     "price_type": "open",
@@ -125,7 +125,7 @@
   },
   {
     "id": 2847229,
-    "description": "Country Wht Boule 53",
+    "description": "Country Wht Boule",
     "price": 75.71,
     "cost": null,
     "price_type": "system",
@@ -136,7 +136,7 @@
   },
   {
     "id": 2847230,
-    "description": "Semolina Batard 54",
+    "description": "Semolina Batard",
     "price": 77.14,
     "cost": null,
     "price_type": "system",
@@ -147,7 +147,7 @@
   },
   {
     "id": 2847231,
-    "description": "Multigrain Batard 55",
+    "description": "Multigrain Batard",
     "price": 78.57,
     "cost": null,
     "price_type": "system",
@@ -158,7 +158,7 @@
   },
   {
     "id": 2847232,
-    "description": "Focaccia 56",
+    "description": "Focaccia",
     "price": 80.0,
     "cost": 56.0,
     "price_type": "system",
@@ -169,7 +169,7 @@
   },
   {
     "id": 2847233,
-    "description": "Rolls 57",
+    "description": "Rolls",
     "price": 81.43,
     "cost": null,
     "price_type": "system",

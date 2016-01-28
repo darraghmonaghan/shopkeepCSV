@@ -1,73 +1,9 @@
 require 'csv'
 require 'json'
+require './supportFunctions'
 
 
 export_file = './exportedData.json'					## variable of filename JSON to be exported to
-
-
-#######################         Supporting Functions        ##########################
-
-		def currency_to_integer(string)
-			return string.scan(/[-.0-9]/).join().to_f			## tried almost everything to get to 2 decimal points
-		end
-
-		def string_to_integer(string)
-			return string.to_i   								## need to remove any letters??
-		end
-
-		def description_formatting(string)
-			cleaned = string.gsub(/\d/, '').strip
-			return cleaned.split(" ").map(&:capitalize).join(" ")
-		end
-
-
-		def modifier_object(name1, price1, name2, price2, name3, price3)
-
-			  ### Ternary Operators to address blanks / null entries ###
-			  modifier_1_price = price1 != nil ? currency_to_integer(price1) : nil
-
-			  modifier_2_price = price2 != nil ? currency_to_integer(price2) : nil
-			  
-			  modifier_3_price = price3 != nil ? currency_to_integer(price3) : nil
-
-			  	if name1 && name2 && name3
-					return [
-							  	{ name: name1,
-							  	  price: modifier_1_price				
-							  	},
-							  	{
-							  	  name: name2,
-			  					  price: modifier_2_price				  		
-							  	},
-							  	{ 
-							  	  name: name3,
-			  					  price: modifier_3_price	
-							  	}
-						   ]
-
-			  	elsif name1 && name2
-					return [
-							  	{ name: name1,
-							  	  price: modifier_1_price
-							  	},
-							  	{
-							  	  name: name2,
-			  					  price: modifier_2_price				  		
-							  	}
-						   ]
-
-			    elsif name1
-					return [
-							  	{ name: name1,
-							  	  price: modifier_1_price
-							  	}
-							]
-
-				else
-					[]
-				end
-		end
-
 
 
 #######################         CSV to JSON function        ##########################
@@ -112,7 +48,8 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
 end)
 
 
-# puts output
+puts output
+
 
 File.write(export_file, output)
 
