@@ -8,12 +8,18 @@ export_file = './exportedData.json'					## variable of filename JSON to be expor
 #######################         Supporting Functions        ##########################
 
 		def currency_to_integer(string)
-			return string.scan(/[-.0-9]/).join().to_f
+			return string.scan(/[-.0-9]/).join().to_f			## tried almost everything to get to 2 decimal points
 		end
 
 		def string_to_integer(string)
-			return string.to_i
+			return string.to_i   								## need to remove any letters??
 		end
+
+		def description_formatting(string)
+			cleaned = string.gsub(/\d/, '').strip
+			return cleaned.split(" ").map(&:capitalize).join(" ")
+		end
+
 
 		def modifier_object(name1, price1, name2, price2, name3, price3)
 
@@ -67,11 +73,6 @@ export_file = './exportedData.json'					## variable of filename JSON to be expor
 #######################         CSV to JSON function        ##########################
 
 output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |row|
-  
-
-  # row.each do |k, v|						### WHAT IS THIS??????
-  # end
-  											## and what is this end doing? necessary?
 
 
   ### Creating variables to pass to JSON object ###
@@ -82,6 +83,8 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
   cost = row['cost'] != nil ? currency_to_integer(row['cost']) : nil
 
   id = string_to_integer(row['item id'])
+
+  description = description_formatting(row['description'])
 
 
   ### Creating modifiers object as a variable ###
@@ -96,7 +99,7 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
   ### Creating each object entered into JSON file  ###
 
   	{ id: id,
-	  description: row['description'],
+	  description: description,
       price: price,								## variable passed from ternary operator value
 	  cost: cost,								## variable passed from ternary operator value
 	  price_type: row['price_type'],			
@@ -109,19 +112,7 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
 end)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-puts output
+# puts output
 
 File.write(export_file, output)
 
