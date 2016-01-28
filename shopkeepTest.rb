@@ -48,7 +48,7 @@ output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |r
 end)
 
 
-puts output
+# puts output
 
 
 File.write(export_file, output)
