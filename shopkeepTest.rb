@@ -66,13 +66,11 @@ export_file = './exportedData.json'					## variable of filename JSON to be expor
 
 #######################         CSV to JSON function        ##########################
 
-
-
 output = JSON.pretty_generate(CSV.open('./example.csv', headers: true).map do |row|
   
 
-  row.each do |k, v|						### WHAT IS THIS??????
-  end
+  # row.each do |k, v|						### WHAT IS THIS??????
+  # end
   											## and what is this end doing? necessary?
 
 
