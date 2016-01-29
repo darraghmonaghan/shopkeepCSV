@@ -1,4 +1,64 @@
 
+#######################      Master Function to Determine appropriate Data Category function       ##########################
+
+def check_data_category(data_category, import_file, export_file, input_format, output_format)
+    category = data_category.downcase
+
+    if category != 'customer' || category != 'transaction' || category != 'product'
+    	puts "Error: Incorrect category of conversion data entered, please check entry. Valid options - 'Product', 'Customer' or 'Transaction'."
+		return -100			## negative 100 return used for testing purposes
+
+    elsif category == 'customer' 
+    	puts "Error: The system is not currently able to convert data relating to Customers"
+    	return -100			## negative 100 return used for testing purposes
+
+    elsif category == 'transaction'
+    	puts "Error: The system is not currently able to convert data relating to Transactions"
+    	return -100			## negative 100 return used for testing purposes
+
+    elsif category == 'product'
+    	product_category(import_file, export_file, input_format, output_format)
+    	return 200 		## positive 200 return used for testing purposes
+    end
+end
+
+
+#######################      Data Category Function       ##########################
+
+def product_category(import_file, export_file, input_format, output_format)
+	import_file_check = File.file?(import_file)
+	export_file_check = File.file?(export_file)
+	import_format = input_format.downcase
+	export_format = output_format.downcase
+
+	if import_format != 'csv' || import_format != 'xml' || import_format != 'json'
+    	puts "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
+		return -100			## negative 100 return used for testing purposes
+
+	elsif export_format != 'csv' || export_format != 'xml' || export_format != 'json'
+    	puts "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
+		return -100			## negative 100 return used for testing purposes
+
+	elsif import_file_check == false || export_file_check == false
+		puts "Error: Problem identified with target import and export files, please check their naming, as well as path file accuracy"
+     	return -100
+	end
+
+	if import_format == 'csv' && export_format == 'json'
+		product_CSV_to_JSON(import_file, export_file)
+		return 200
+	else
+		puts "The conversion request you have submitted is not on offer at present"
+		return -100
+	end
+
+end
+
+
+
+
+
+
 #######################         Supporting Functions        ##########################
 
 		def currency_to_integer(string)

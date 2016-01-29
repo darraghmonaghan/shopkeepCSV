@@ -1,25 +1,8 @@
-require 'csv'
-require 'json'
-require './supportFunctions'
-
-product_data_import_file = './example.csv'               ## variable of filename CSV to be imported from
-product_data_export_file = './exportedData.json'					## variable of filename JSON to be exported to
-
-
-#######################      Master Function to Determine appropriate sub function       ##########################
-def start_data_conversion(data_category, import_file, export_file, input_format, output_format)
-    if data_category = 'Product' && input_format = "CSV" && output_format = "JSON"
-          puts "reached master sorting function"
-          product_CSV_to_JSON(import_file, export_file)
-    end 
-end
 
 
 #######################         CSV to JSON function - Product Data       ##########################
 
 def product_CSV_to_JSON(import_file, export_file)
-
-    puts "reached product CSV to JSON function"
 
     export_data = JSON.pretty_generate(CSV.open(import_file, headers: true).map do |row|
 
@@ -54,19 +37,7 @@ def product_CSV_to_JSON(import_file, export_file)
 
     end)
 
-
-    # puts export_data
-
-
-    File.write(export_file, export_data)
+    File.write(export_file, export_data)				 ## Exports the desired data to the target file specified previously in importerExporter.rb
 
 end
-
-#######################         Initiate Conversion       ##########################
-
-start_data_conversion('Product', product_data_import_file, product_data_export_file, "CSV", "JSON")
-
-
-
-
 

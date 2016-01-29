@@ -1,8 +1,76 @@
 
-require "./shopkeepTest.rb"
-
+require "./importerExporter.rb"
 require "./supportFunctions.rb"
+require "./productCSVtoJSON.rb"
 
+
+#################### Tests on Master Function ###################### 
+
+describe "#check_data_category" do
+  it "throws an error if data category / conversion type is invalid" do
+    expect( check_data_category("121", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_data_category("Pizza", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_data_category(121, "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_data_category('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+    expect( check_data_category('Customer', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200 
+    expect( check_data_category('Transaction', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+  end
+end
+
+
+#################### Tests on Data Category Function ######################
+
+describe "#product_category" do
+  it "throws an error if import data format is invalid" do
+    expect( product_category("'./example.csv'", "'./example.csv'", 123, 'JSON') ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", 'Pizza', 'JSON') ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", -123, 'JSON') ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+    expect( product_category("'./example.csv'", "'./example.csv'", 'cSv', 'JSON') ).to eq 200 
+    expect( product_category("'./example.csv'", "'./example.csv'", 'xML', 'JSON') ).to eq 200
+  end
+
+  it "throws an error if export data format is invalid" do
+    expect( product_category("'./example.csv'", "'./example.csv'", "CSV", 123) ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", 'JSON', -123) ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", "XmL", 'Pizza') ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
+    expect( product_category("'./example.csv'", "'./example.csv'", 'cSv', 'xMl') ).to eq 200 
+    expect( product_category("'./example.csv'", "'./example.csv'", 'xML', 'cSv') ).to eq 200
+  end
+
+  it "throws an error if target import file is invalid / does not exist" do
+    expect( product_category("'./ThisDoesntExist.csv'", "'./example.csv'", "CSV", 'JSON') ).to eq -100
+    expect( product_category(123, "'./example.csv'", 'JSON', 'XML') ).to eq -100
+    expect( product_category(-123, "'./example.csv'", "XmL", 'Pizza') ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
+  end
+
+  it "throws an error if target export file is invalid / does not exist" do
+    expect( product_category("'./example.csv'", 123, "CSV", 'JSON') ).to eq -100
+    expect( product_category("'./example.csv'", "'./ThisDoesntExist.json'", 'JSON', 'XML') ).to eq -100
+    expect( product_category("'./example.csv'", -123, "XmL", 'Pizza') ).to eq -100
+    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
+  end
+end
+
+describe "#product_category" do
+  it "throws an error if import file does not exist / is invalid" do
+    expect( product_category("121", false, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( product_category("Pizza", "'./ThisDoesntExist.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( product_category("121", 12345, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+  end
+
+  it "throws an error if export file does not exist / is invalid" do
+    expect( product_category("121", "'./example.csv'", false, 'CSV', 'JSON') ).to eq -100
+    expect( product_category("Pizza", "'./example.csv'", "'./ThisDoesntExist.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( product_category("121", "'./example.csv'", 12345, 'CSV', 'JSON') ).to eq -100
+  end
+end
+
+
+
+#################### Tests on Supporting Functions ######################
 
 
 describe "#string_to_integer" do
