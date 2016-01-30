@@ -67,7 +67,6 @@
 		end
 
 
-
 #######################      Master Function to Determine appropriate Data Category function       ##########################
 
 def check_input_data(data_category, import_file, export_file, input_format, output_format)
@@ -77,14 +76,6 @@ def check_input_data(data_category, import_file, export_file, input_format, outp
 	import_format_checked = description_formatting(input_format).downcase
 	export_format_checked = description_formatting(output_format).downcase
 
-	### Ensuring input data is complete, correct, and within set parameters ###
-  #   if category != 'customer' || category != 'transaction' || category != 'product'
-  #   	puts "Error: What is going on!."
-		# return -100			## negative 100 return used for testing purposes
-
-	# elsif import_file_checked == false || export_file_checked == false
-	# 	puts "Error: Problem identified with target import and export files, please check their naming, as well as path file accuracy"
- #     	return -100
 
 	if import_file == true || export_file == true
     	puts "Error: Boolean value trying to be input as either import or export target file"
@@ -103,11 +94,11 @@ def check_input_data(data_category, import_file, export_file, input_format, outp
 	### Filtering the conversion request based on Conversion Category ###
     if category == 'customer' 
     	puts "Error: The system is not currently able to convert data relating to Customers"
-    	return -100			## negative 100 return used for testing purposes
+    	return 300			## negative 100 return used for testing purposes
 
     elsif category == 'transaction'
     	puts "Error: The system is not currently able to convert data relating to Transactions"
-    	return -100			## negative 100 return used for testing purposes
+    	return 300			## negative 100 return used for testing purposes
 
     elsif category == 'product'
     	product_category(import_file, export_file, import_format_checked, export_format_checked)
@@ -116,7 +107,7 @@ def check_input_data(data_category, import_file, export_file, input_format, outp
 end
 
 
-#######################      Data Category Function       ##########################
+######################      Data Category Function       ##########################
 
 def product_category(import_file, export_file, input_format, output_format)
 

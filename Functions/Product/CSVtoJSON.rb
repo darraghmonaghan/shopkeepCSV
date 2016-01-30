@@ -9,7 +9,7 @@ require 'json'                                    ## do not touch
 def product_CSV_to_JSON(import_file, export_file)
 
     export_data = JSON.pretty_generate(CSV.open(import_file, :quote_char => "|", headers: true).map do |row|
-
+          
       ### Creating variables to pass to JSON object ###
       quantity_on_hand = row['quantity_on_hand'] != nil ? string_to_integer(row['quantity_on_hand']) : nil
       price = row['price'] != nil ? currency_to_integer(row['price']) : nil

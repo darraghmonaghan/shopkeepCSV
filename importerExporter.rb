@@ -15,22 +15,7 @@ output_format = 'JSON'                          ##   OPTIONS:  'JSON'   (Eventua
 
 #######################         Initiate Conversion  - DO NOT TOUCH      ##########################
 
-input1 = conversion_type.to_s                     ##   OPTIONS: 'Product' (Eventually "Customer" and "Transaction" will be added)
-input2 = import_file.to_s                  ##   1) Ensure target docutment exists, 2) Ensure correct path
-input3 = export_file.to_s				##   variable of filename JSON to be exported to - ensure correct path
-input4 = input_format.to_s                            ##   OPTIONS:  'CSV'    (Eventually 'XML', 'JSON')
-input5 = output_format.to_s                          ##   OPTIONS:  'JSON'   (Eventually 'XML', 'CSV')
-
-
-
-
-check_input_data(input1, input2, input3, input4, input5)
-
-
-
-
-
-
+check_input_data(conversion_type, import_file, export_file, input_format, output_format)
 
 
 
