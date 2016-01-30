@@ -1,72 +1,106 @@
 
-require "./importerExporter.rb"
-require "./supportFunctions.rb"
-require "./productCSVtoJSON.rb"
+require "/importerExporter.rb"
+require '/Functions/SupportFunctions/supportFunctions.rb'         
+require '/Functions/Product/CSVtoJSON.rb'    
 
 
 #################### Tests on Master Function ###################### 
 
-describe "#check_data_category" do
-  it "throws an error if data category / conversion type is invalid" do
-    expect( check_data_category("121", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( check_data_category("Pizza", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( check_data_category(121, "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( check_data_category('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
-    expect( check_data_category('Customer', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200 
-    expect( check_data_category('Transaction', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+describe "#check_input_data" do
+  it "throws an error if category of data conversion is invalid - not Product, Customer or Transaction" do
+    expect( check_input_data("121", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("Pizza", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("!!%%#@@}", "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data(121, "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('product', 'tests.rb', 'tests.rb', 'csv', 'json') ).to eq 200
+    expect( check_input_data('Customer', 'example.csv', 'example.csv', 'CSV', 'JSON') ).to eq 200 
+    expect( check_input_data('Transaction', 'example.csv', 'example.csv', 'CSV', 'JSON') ).to eq 200
   end
+
+  it "throws an error if target import file is invalid / does not exist" do
+    # expect( check_input_data('Transaction', false, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    # expect( check_input_data('Transaction', true, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Transaction', 123, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Transaction', "'./thisFileDoesNotExist.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+  end
+
+  it "throws an error if target export file is invalid / does not exist" do
+    # expect( check_input_data("Product", "'./example.csv'", false, 'CSV', 'JSON') ).to eq -100
+    # expect( check_input_data("Product", "'./example.csv'", true, 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("Transaction", "'./example.csv'", 123, 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("Customer", "'./example.csv'", "'./thisFileDoesNotExist.csv'", 'CSV', 'JSON') ).to eq -100 
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+  end
+
+  it "throws an error if format of import data is invalid" do
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'Pizza', 'JSON') ).to eq -100
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'pizza', 'JSON') ).to eq -100    
+
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'cSv', 'JSON') ).to eq 200
+  end
+
+  it "throws an error if format of export data is invalid" do
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'Pizza') ).to eq -100
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'JSON', 'piZZa') ).to eq -100    
+
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'CSV', 'JsoN') ).to eq 200
+    expect( check_input_data('Product', "'./example.csv'", "'./example.csv'", 'JSON', 'xMl') ).to eq 200
+  end
+
 end
 
 
 #################### Tests on Data Category Function ######################
 
-describe "#product_category" do
-  it "throws an error if import data format is invalid" do
-    expect( product_category("'./example.csv'", "'./example.csv'", 123, 'JSON') ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", 'Pizza', 'JSON') ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", -123, 'JSON') ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
-    expect( product_category("'./example.csv'", "'./example.csv'", 'cSv', 'JSON') ).to eq 200 
-    expect( product_category("'./example.csv'", "'./example.csv'", 'xML', 'JSON') ).to eq 200
-  end
+# describe "#product_category" do
+#   it "throws an error if import data format is invalid" do
+#     expect( product_category("'./example.csv'", "'./example.csv'", 123, 'JSON') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'Pizza', 'JSON') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", -123, 'JSON') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq 200
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'cSv', 'JSON') ).to eq 200 
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'xML', 'JSON') ).to eq 200
+#   end
 
-  it "throws an error if export data format is invalid" do
-    expect( product_category("'./example.csv'", "'./example.csv'", "CSV", 123) ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", 'JSON', -123) ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", "XmL", 'Pizza') ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
-    expect( product_category("'./example.csv'", "'./example.csv'", 'cSv', 'xMl') ).to eq 200 
-    expect( product_category("'./example.csv'", "'./example.csv'", 'xML', 'cSv') ).to eq 200
-  end
+#   it "throws an error if export data format is invalid" do
+#     expect( product_category("'./example.csv'", "'./example.csv'", "CSV", 123) ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'JSON', -123) ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", "XmL", 'Pizza') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'cSv', 'xMl') ).to eq 200 
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'xML', 'cSv') ).to eq 200
+#   end
 
-  it "throws an error if target import file is invalid / does not exist" do
-    expect( product_category("'./ThisDoesntExist.csv'", "'./example.csv'", "CSV", 'JSON') ).to eq -100
-    expect( product_category(123, "'./example.csv'", 'JSON', 'XML') ).to eq -100
-    expect( product_category(-123, "'./example.csv'", "XmL", 'Pizza') ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
-  end
+#   it "throws an error if target import file is invalid / does not exist" do
+#     expect( product_category("'./ThisDoesntExist.csv'", "'./example.csv'", "CSV", 'JSON') ).to eq -100
+#     expect( product_category(123, "'./example.csv'", 'JSON', 'XML') ).to eq -100
+#     expect( product_category(-123, "'./example.csv'", "XmL", 'Pizza') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
+#   end
 
-  it "throws an error if target export file is invalid / does not exist" do
-    expect( product_category("'./example.csv'", 123, "CSV", 'JSON') ).to eq -100
-    expect( product_category("'./example.csv'", "'./ThisDoesntExist.json'", 'JSON', 'XML') ).to eq -100
-    expect( product_category("'./example.csv'", -123, "XmL", 'Pizza') ).to eq -100
-    expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
-  end
-end
+#   it "throws an error if target export file is invalid / does not exist" do
+#     expect( product_category("'./example.csv'", 123, "CSV", 'JSON') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./ThisDoesntExist.json'", 'JSON', 'XML') ).to eq -100
+#     expect( product_category("'./example.csv'", -123, "XmL", 'Pizza') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./example.csv'", 'CSV', 'JsOn') ).to eq 200
+#   end
+# end
 
-describe "#product_category" do
-  it "throws an error if import file does not exist / is invalid" do
-    expect( product_category("121", false, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( product_category("Pizza", "'./ThisDoesntExist.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( product_category("121", 12345, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-  end
+# describe "#product_category" do
+#   it "throws an error if import file does not exist / is invalid" do
+#     expect( product_category(false, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+#     expect( product_category("'./ThisDoesntExist.csv'", "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+#     expect( product_category(12345, "'./example.csv'", 'CSV', 'JSON') ).to eq -100
+#   end
 
-  it "throws an error if export file does not exist / is invalid" do
-    expect( product_category("121", "'./example.csv'", false, 'CSV', 'JSON') ).to eq -100
-    expect( product_category("Pizza", "'./example.csv'", "'./ThisDoesntExist.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( product_category("121", "'./example.csv'", 12345, 'CSV', 'JSON') ).to eq -100
-  end
-end
+#   it "throws an error if export file does not exist / is invalid" do
+#     expect( product_category("'./example.csv'", false, 'CSV', 'JSON') ).to eq -100
+#     expect( product_category("'./example.csv'", "'./ThisDoesntExist.csv'", 'CSV', 'JSON') ).to eq -100
+#     expect( product_category("'./example.csv'", 12345, 'CSV', 'JSON') ).to eq -100
+#   end
+# end
 
 
 
