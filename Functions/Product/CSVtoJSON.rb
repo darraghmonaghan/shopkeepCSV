@@ -1,8 +1,6 @@
 require 'csv'                                     ## do not touch
 require 'json'                                    ## do not touch
 
-# require './importerExporter.rb' 
-# require './SupportFunctions/supportFunctions.rb' 
 
 #######################         CSV to JSON function - Product Data       ##########################
 
