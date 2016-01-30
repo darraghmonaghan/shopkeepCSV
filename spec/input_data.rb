@@ -6,28 +6,38 @@ require './Functions/Product/CSVtoJSON.rb'
 
 describe "#check_input_data" do
   it "throws an error if target import file is invalid / does not exist" do
-    expect( check_input_data('Transaction', 123, './example.csv', 'CSV', 'JSON') ).to eq -100
-    expect( check_input_data('Transaction', './thisFileDoesNotExist.csv', "'./example.csv'", 'CSV', 'JSON') ).to eq -100
-    expect( check_input_data('Product', './example.csv', './example.csv', 'CSV', 'JSON') ).to eq 200
+    expect( check_input_data('Transaction', 123, './README.md', 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Transaction', true, './README.md', 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Transaction', false, './README.md', 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Transaction', './thisFileDoesNotExist.csv', './README.md', 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', 'JSON') ).to eq 200
   end
 
   it "throws an error if target export file is invalid / does not exist" do
-    expect( check_input_data("Transaction", './example.csv', 123, 'CSV', 'JSON') ).to eq -100
-    expect( check_input_data("Customer", './example.csv', './thisFileDoesNotExist.csv', 'CSV', 'JSON') ).to eq -100 
-    expect( check_input_data('Product', './example.csv', './example.csv', 'CSV', 'JSON') ).to eq 200
+    expect( check_input_data("Transaction", './README.md', 123, 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("Transaction", './README.md', true, 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("Transaction", './README.md', false, 'CSV', 'JSON') ).to eq -100
+    expect( check_input_data("Customer", './README.md', './thisFileDoesNotExist.csv', 'CSV', 'JSON') ).to eq -100 
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', 'JSON') ).to eq 200
   end
 
   it "throws an error if format of import data is invalid" do
-    expect( check_input_data('Product', './example.csv', './example.csv', 'Pizza', 'JSON') ).to eq -100
-    expect( check_input_data('Product', './example.csv', './example.csv', 'pizza', 'JSON') ).to eq -100    
-    expect( check_input_data('Product', './example.csv', './example.csv', 'CSV', 'JSON') ).to eq 200
-    expect( check_input_data('Product', './example.csv', './example.csv', 'cSv', 'JSON') ).to eq 200
+    expect( check_input_data('Product', './README.md', './README.md', 'Pizza', 'JSON') ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', 'pizza', 'JSON') ).to eq -100    
+    expect( check_input_data('Product', './README.md', './README.md', 123, 'JSON') ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', true, 'JSON') ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', false, 'JSON') ).to eq -100    
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', 'JSON') ).to eq 200
+    expect( check_input_data('Product', './README.md', './README.md', 'cSv', 'JSON') ).to eq 200
   end
 
   it "throws an error if format of export data is invalid" do
-    expect( check_input_data('Product', './example.csv', './example.csv', 'CSV', 'Pizza') ).to eq -100
-    expect( check_input_data('Product', './example.csv', './example.csv', 'JSON', 'piZZa') ).to eq -100    
-    expect( check_input_data('Product', './example.csv', './example.csv', 'CSV', 'JsoN') ).to eq 200
-    expect( check_input_data('Product', './example.csv', './example.csv', 'JSON', 'xMl') ).to eq 200
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', 'Pizza') ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', 'JSON', 'piZZa') ).to eq -100 
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', 123) ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', true) ).to eq -100
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', false) ).to eq -100      
+    expect( check_input_data('Product', './README.md', './README.md', 'CSV', 'JsoN') ).to eq 200
+    expect( check_input_data('Product', './README.md', './README.md', 'JSON', 'xMl') ).to eq 200
   end
 end

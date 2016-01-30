@@ -70,15 +70,22 @@
 #######################      Master Function to Determine appropriate Data Category function       ##########################
 
 def check_input_data(data_category, import_file, export_file, input_format, output_format)
-    category = description_formatting(data_category).downcase
+    category = description_formatting(data_category.to_s).downcase
 	import_file_checked = File.file?(import_file.to_s)
 	export_file_checked = File.file?(export_file.to_s)
-	import_format_checked = description_formatting(input_format).downcase
-	export_format_checked = description_formatting(output_format).downcase
+	import_format_checked = description_formatting(input_format.to_s).downcase
+	export_format_checked = description_formatting(output_format.to_s).downcase
 
+	# if import_file == true || import_file == false
+ #    	puts "Error: Boolean value trying to be input as target import file"
+	# 	return -100			## negative 100 return used for testing purposes
 
-	if import_file == true || export_file == true
-    	puts "Error: Boolean value trying to be input as either import or export target file"
+	# elsif export_file == true || export_file == false
+ #    	puts "Error: Boolean value trying to be input as target export file"
+	# 	return -100			## negative 100 return used for testing purposes
+
+	if import_file_checked == false || export_file_checked == false
+    	puts "Error: Either target import or export file is invalid, please check that file exists and path is correct"
 		return -100			## negative 100 return used for testing purposes
 
 	elsif import_format_checked != 'csv' && import_format_checked != 'xml' && import_format_checked != 'json'
@@ -103,6 +110,10 @@ def check_input_data(data_category, import_file, export_file, input_format, outp
     elsif category == 'product'
     	product_category(import_file, export_file, import_format_checked, export_format_checked)
     	return 200 		## positive 200 return used for testing purposes
+
+    else
+		puts "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
+		return -100
     end
 end
 
