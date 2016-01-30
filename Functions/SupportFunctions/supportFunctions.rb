@@ -1,8 +1,31 @@
 
 #######################         Supporting Functions        ##########################
 
+		def error(number)
+
+			if number == 1
+				p "The conversion request you have submitted for those data types is not on offer at present"
+			elsif number == 2
+				p "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
+			elsif number == 3
+				p "Error: Either target import or export file is invalid, please check that file exists and path is correct"
+			elsif number == 4
+				p "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
+			elsif number == 5
+				p "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
+			elsif number == 6	
+				p "Error: The system is not currently able to convert data relating to Customers"
+			elsif number == 7
+				p "Error: The system is not currently able to convert data relating to Transactions"
+			end
+		end
+
 		def currency_to_integer(string)
-			return string.scan(/[-.0-9]/).join().to_f			## tried almost everything to get to 2 decimal points
+			if string[0] == '$' || string[0] == "£" || string[0] == "-"
+				return string.scan(/[-.0-9]/).join().to_f
+			else
+				return nil
+			end
 		end
 
 		def string_to_integer(string)
@@ -10,7 +33,6 @@
 		end
 
 		def description_formatting(string)
-			# puts 'description_formatting function reached'
 			cleaned = string.to_s.gsub(/\d/, '').strip
 			return cleaned.split(" ").map(&:capitalize).join(" ")
 		end
@@ -76,44 +98,29 @@ def check_input_data(data_category, import_file, export_file, input_format, outp
 	import_format_checked = description_formatting(input_format.to_s).downcase
 	export_format_checked = description_formatting(output_format.to_s).downcase
 
-	# if import_file == true || import_file == false
- #    	puts "Error: Boolean value trying to be input as target import file"
-	# 	return -100			## negative 100 return used for testing purposes
-
-	# elsif export_file == true || export_file == false
- #    	puts "Error: Boolean value trying to be input as target export file"
-	# 	return -100			## negative 100 return used for testing purposes
-
 	if import_file_checked == false || export_file_checked == false
-    	puts "Error: Either target import or export file is invalid, please check that file exists and path is correct"
-		return -100			## negative 100 return used for testing purposes
+    	return error(3)
 
 	elsif import_format_checked != 'csv' && import_format_checked != 'xml' && import_format_checked != 'json'
-    	puts "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
-		return -100			## negative 100 return used for testing purposes
+    	return error(4)
 
 	elsif export_format_checked != 'csv' && export_format_checked != 'xml' && export_format_checked != 'json'
-    	puts "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
-		return -100			## negative 100 return used for testing purposes
+    	return error(5)
 	end
 
 
 	### Filtering the conversion request based on Conversion Category ###
     if category == 'customer' 
-    	puts "Error: The system is not currently able to convert data relating to Customers"
-    	return 300			## negative 100 return used for testing purposes
+    	return error(6)
 
     elsif category == 'transaction'
-    	puts "Error: The system is not currently able to convert data relating to Transactions"
-    	return 300			## negative 100 return used for testing purposes
+    	return error(7)
 
     elsif category == 'product'
     	product_category(import_file, export_file, import_format_checked, export_format_checked)
-    	return 200 		## positive 200 return used for testing purposes
-
+    	return 200 ### for testing purposes
     else
-		puts "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
-		return -100
+		return error(2)
     end
 end
 
@@ -124,10 +131,9 @@ def product_category(import_file, export_file, input_format, output_format)
 
 	if input_format == 'csv' && output_format == 'json'
 		product_CSV_to_JSON(import_file, export_file)
-		return 200
+		return 200 ## for testing purposes
 	else
-		puts "The conversion request you have submitted for those data types is not on offer at present"
-		return -100
+		return error(1)
 	end
 
 end

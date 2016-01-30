@@ -7,9 +7,9 @@ require './Functions/Product/CSVtoJSON.rb'        					## do not touch
 
 conversion_type = 'product'                     ##   OPTIONS: 'Product' (Eventually "Customer" and "Transaction" will be added)
 import_file = './example.csv'                   ##   1) Ensure target docutment exists, 2) Ensure correct path
-export_file = './exportedData.json'				##   variable of filename JSON to be exported to - ensure correct path
+export_file = './exportedData.json'				##   variable of filename to be exported to - ensure correct path
 input_format = 'CSV'                            ##   OPTIONS:  'CSV'    (Eventually 'XML', 'JSON')
-output_format = 'json'                          ##   OPTIONS:  'JSON'   (Eventually 'XML', 'CSV')
+output_format = 'JSON'                          ##   OPTIONS:  'JSON'   (Eventually 'XML', 'CSV')
 
 
 
