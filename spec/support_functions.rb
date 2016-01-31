@@ -1,6 +1,21 @@
 
 require './functions/support_functions/support_functions.rb'         
 
+describe "#check_formatting" do
+  it "Checks to ensure data is intended to be a currency, not rogue entries" do
+    expect( check_formatting(124567) ).to eq nil
+    expect( check_formatting(0000111223) ).to eq nil 
+    expect( check_formatting(0.00111223) ).to eq nil 
+  end
+end
+
+describe "#file_format" do
+  it "Returns the file format in letter terms only" do
+    expect( file_format("./test.jpg") ).to eq "jpg"
+    expect( file_format("./test.xml") ).to eq "xml"
+    expect( file_format("./test.json") ).to eq "json"  
+  end
+end
 
 describe "#string_to_integer" do
   it "converts a string to a datatype of integer" do
@@ -16,16 +31,6 @@ describe "#description_formatting" do
     expect( description_formatting("12232344 thIS STRINg iS so UglY") ).to eq "This String Is So Ugly"
   end
 end
-
-describe "#check_formatting" do
-  it "Checks to ensure data is intended to be a currency, not rogue entries" do
-    expect( check_formatting(124567) ).to eq nil
-    expect( check_formatting(0000111223) ).to eq nil 
-    expect( check_formatting(0.00111223) ).to eq nil 
-  end
-end
-
-
 
 describe "#currency_to_integer" do
   it "Changes the string data input, with currency formatting, to integer with 2 decimal places" do

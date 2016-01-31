@@ -11,6 +11,12 @@ require './functions/support_functions/error_messages.rb'
 			end
 		end
 
+		def file_format(file)
+			extension = File.extname(file)
+			extension[0] = ''
+			return extension
+		end
+
 		def currency_to_integer(string)
 			return string.scan(/[-.0-9]/).join().to_f
 		end

@@ -21,7 +21,7 @@ require './functions/support_functions/check_input_data.rb'   	## do not touch
 conversion_type = 'Product'                     
 import_file = './target_import_file.csv'        
 export_file = './target_export_file.json'	
-input_format = 'CSV'                            
+input_format = 'XML'                            
 output_format = 'JSON'                          
 
 

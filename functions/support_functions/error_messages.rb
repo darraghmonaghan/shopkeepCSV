@@ -16,5 +16,7 @@
 				p "Error: The system is not currently able to convert data relating to Customers"
 			elsif number == 7
 				p "Error: The system is not currently able to convert data relating to Transactions"
+			elsif number == 8
+				p "Mismatch between stated file format and format of target import / export file"
 			end
 		end
