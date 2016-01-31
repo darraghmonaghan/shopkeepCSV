@@ -1,24 +1,7 @@
 
+require './Functions/SupportFunctions/errorMessages.rb'    
+
 #######################         Supporting Functions        ##########################
-
-		def error(number)
-
-			if number == 1
-				p "The conversion request you have submitted for those data types is not on offer at present"
-			elsif number == 2
-				p "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
-			elsif number == 3
-				p "Error: Either target import or export file is invalid, please check that file exists and path is correct"
-			elsif number == 4
-				p "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
-			elsif number == 5
-				p "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
-			elsif number == 6	
-				p "Error: The system is not currently able to convert data relating to Customers"
-			elsif number == 7
-				p "Error: The system is not currently able to convert data relating to Transactions"
-			end
-		end
 
 		def check_formatting(input)
 			if input.class == Fixnum || input.class == Float
@@ -33,7 +16,7 @@
 		end
 
 		def string_to_integer(string)
-			return string.to_i   								## need to remove any letters??
+			return string.to_i   								
 		end
 
 		def description_formatting(string)
@@ -92,55 +75,6 @@
 				end
 		end
 
-
-#######################      Master Function to Determine appropriate Data Category function       ##########################
-
-def check_input_data(data_category, import_file, export_file, input_format, output_format)
-    category = description_formatting(data_category.to_s).downcase
-	import_file_checked = File.file?(import_file.to_s)
-	export_file_checked = File.file?(export_file.to_s)
-	import_format_checked = description_formatting(input_format.to_s).downcase
-	export_format_checked = description_formatting(output_format.to_s).downcase
-
-	if import_file_checked == false || export_file_checked == false
-    	return error(3)
-
-	elsif import_format_checked != 'csv' && import_format_checked != 'xml' && import_format_checked != 'json'
-    	return error(4)
-
-	elsif export_format_checked != 'csv' && export_format_checked != 'xml' && export_format_checked != 'json'
-    	return error(5)
-	end
-
-
-	### Filtering the conversion request based on Conversion Category ###
-    if category == 'customer' 
-    	return error(6)
-
-    elsif category == 'transaction'
-    	return error(7)
-
-    elsif category == 'product'
-    	product_category(import_file, export_file, import_format_checked, export_format_checked)
-    	return 200 ### for testing purposes
-    else
-		return error(2)
-    end
-end
-
-
-######################      Data Category Function       ##########################
-
-def product_category(import_file, export_file, input_format, output_format)
-
-	if input_format == 'csv' && output_format == 'json'
-		product_CSV_to_JSON(import_file, export_file)
-		return 200 ## for testing purposes
-	else
-		return error(1)
-	end
-
-end
 
 
 

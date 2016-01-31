@@ -1,8 +1,6 @@
 
-require "./importerExporter.rb"
-require './Functions/SupportFunctions/supportFunctions.rb'         
-require './Functions/Product/CSVtoJSON.rb'    
-
+require './Functions/SupportFunctions/productCategory.rb'         
+require './Functions/SupportFunctions/errorMessages.rb' 
 
 #################### Tests on Data Category Function ######################
 

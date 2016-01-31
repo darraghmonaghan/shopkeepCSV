@@ -1,7 +1,7 @@
 require 'csv'                       							## do not touch
 require 'json'                      							## do not touch
-require './Functions/SupportFunctions/supportFunctions.rb'        	## do not touch
-require './Functions/Product/CSVtoJSON.rb'        					## do not touch
+require './Functions/SupportFunctions/checkInputData.rb'       	## do not touch
+
 
 ########################       Variables required to start conversion     #################### 
 

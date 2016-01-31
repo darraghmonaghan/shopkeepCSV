@@ -1,7 +1,6 @@
 
-require "./importerExporter.rb"
-require './Functions/SupportFunctions/supportFunctions.rb'         
-require './Functions/Product/CSVtoJSON.rb'    
+
+require './Functions/SupportFunctions/checkInputData.rb'           
 
 
 describe "#check_input_data" do
