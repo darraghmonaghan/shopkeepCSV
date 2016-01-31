@@ -20,17 +20,14 @@ require './functions/support_functions/check_input_data.rb'   	## do not touch
 
 conversion_type = 'Product'                     
 import_file = './target_import_file.csv'        
-export_file = './target_export_file.json'	
-input_format = 'XML'                            
-output_format = 'JSON'                          
-
+export_file = './target_export_file.json'                        
 
 
 ##############################################################################################
 ###############################          Initiate Conversion         ######################### 
 ##############################################################################################
 
-check_input_data(conversion_type, import_file, export_file, input_format, output_format)
+check_input_data(conversion_type, import_file, export_file)
 
 
 

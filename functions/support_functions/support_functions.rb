@@ -17,10 +17,6 @@ require './functions/support_functions/error_messages.rb'
 			return extension
 		end
 
-		def currency_to_integer(string)
-			return string.scan(/[-.0-9]/).join().to_f
-		end
-
 		def string_to_integer(string)
 			return string.to_i   								
 		end
@@ -30,6 +26,9 @@ require './functions/support_functions/error_messages.rb'
 			return cleaned.split(" ").map(&:capitalize).join(" ")
 		end
 
+		def currency_to_integer(string)
+			return string.scan(/[-.0-9]/).join().to_f
+		end
 
 		def modifier_object(name1, price1, name2, price2, name3, price3)
 

@@ -13,7 +13,8 @@ describe "#file_format" do
   it "Returns the file format in letter terms only" do
     expect( file_format("./test.jpg") ).to eq "jpg"
     expect( file_format("./test.xml") ).to eq "xml"
-    expect( file_format("./test.json") ).to eq "json"  
+    expect( file_format("./test.json") ).to eq "json"
+    expect( file_format("../test/test/test.json") ).to eq "json"  
   end
 end
 
@@ -41,11 +42,6 @@ describe "#currency_to_integer" do
     expect( currency_to_integer("$1,000,000,000") ).to eq 1000000000.00    
   end
 end
-
-
-
-
-
 
 
 describe "#modifier_object" do
