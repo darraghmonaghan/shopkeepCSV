@@ -40,5 +40,7 @@ def product_CSV_to_JSON(import_file, export_file)
 
     File.write(export_file, export_data)				 ## Exports the desired data to the target file specified previously in importerExporter.rb
 
+    puts "Conversion complete, please check the target export file."
+
 end
 

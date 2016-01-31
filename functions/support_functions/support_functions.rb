@@ -41,12 +41,10 @@ require './functions/support_functions/error_messages.rb'
 					return [
 							  	{ name: modifier_1_name,
 							  	  price: modifier_1_price				
-							  	},
-							  	{
+							  	},{
 							  	  name: modifier_2_name,
 			  					  price: modifier_2_price				  		
-							  	},
-							  	{ 
+							  	},{ 
 							  	  name: modifier_3_name,
 			  					  price: modifier_3_price	
 							  	}
@@ -56,8 +54,7 @@ require './functions/support_functions/error_messages.rb'
 					return [
 							  	{ name: modifier_1_name,
 							  	  price: modifier_1_price
-							  	},
-							  	{
+							  	},{
 							  	  name: modifier_2_name,
 			  					  price: modifier_2_price				  		
 							  	}
@@ -74,8 +71,3 @@ require './functions/support_functions/error_messages.rb'
 					[]
 				end
 		end
-
-
-
-
-
