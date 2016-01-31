@@ -18,6 +18,16 @@ describe "#description_formatting" do
   end
 end
 
+describe "#check_formatting" do
+  it "Checks to ensure data is intended to be a currency, not rogue entries" do
+    expect( check_formatting(124567) ).to eq nil
+    expect( check_formatting(0000111223) ).to eq nil 
+    expect( check_formatting(0.00111223) ).to eq nil 
+  end
+end
+
+
+
 describe "#currency_to_integer" do
   it "Changes the string data input, with currency formatting, to integer with 2 decimal places" do
     expect( currency_to_integer("$14.00") ).to eq 14.00
@@ -27,6 +37,12 @@ describe "#currency_to_integer" do
     expect( currency_to_integer("$1,000,000,000") ).to eq 1000000000.00    
   end
 end
+
+
+
+
+
+
 
 describe "#modifier_object" do
   it "Accepts upto 6 parameters, Titleizing all text, and converting numbers to Integers" do

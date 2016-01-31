@@ -20,12 +20,16 @@
 			end
 		end
 
-		def currency_to_integer(string)
-			if string[0] == '$' || string[0] == "£" || string[0] == "-"
-				return string.scan(/[-.0-9]/).join().to_f
-			else
+		def check_formatting(input)
+			if input.class == Fixnum || input.class == Float
 				return nil
+			else
+				currency_to_integer(input)
 			end
+		end
+
+		def currency_to_integer(string)
+			return string.scan(/[-.0-9]/).join().to_f
 		end
 
 		def string_to_integer(string)

@@ -72,7 +72,7 @@
     "id": 2847225,
     "description": "Milk",
     "price": 70.0,
-    "cost": null,
+    "cost": 49.0,
     "price_type": "system",
     "quantity_on_hand": 510,
     "modifiers": [
@@ -160,7 +160,7 @@
     "id": 2847232,
     "description": "Focaccia",
     "price": 80.0,
-    "cost": null,
+    "cost": 56.0,
     "price_type": "system",
     "quantity_on_hand": 440,
     "modifiers": [

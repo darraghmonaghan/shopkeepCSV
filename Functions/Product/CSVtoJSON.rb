@@ -11,7 +11,7 @@ def product_CSV_to_JSON(import_file, export_file)
       ### Creating variables to pass to JSON object ###
       quantity_on_hand = row['quantity_on_hand'] != nil ? string_to_integer(row['quantity_on_hand']) : nil
       price = row['price'] != nil ? currency_to_integer(row['price']) : nil
-      cost = row['cost'] != nil ? currency_to_integer(row['cost']) : nil
+      cost = row['cost'] != nil ? check_formatting(row['cost']) : nil
       id = string_to_integer(row['item id'])
       description = description_formatting(row['description'])
 
