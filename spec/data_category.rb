@@ -1,6 +1,6 @@
 
-require './Functions/SupportFunctions/productCategory.rb'         
-require './Functions/SupportFunctions/errorMessages.rb' 
+require './functions/support_functions/product_category.rb'         
+require './functions/support_functions/error_messages.rb' 
 
 #################### Tests on Data Category Function ######################
 

@@ -1,5 +1,5 @@
 
-require './Functions/SupportFunctions/errorMessages.rb'    
+require './functions/support_functions/error_messages.rb'    
 
 #######################         Supporting Functions        ##########################
 

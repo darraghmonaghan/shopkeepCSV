@@ -1,7 +1,7 @@
 
-require './Functions/SupportFunctions/errorMessages.rb'
-require './Functions/SupportFunctions/productCategory.rb' 
-require './Functions/SupportFunctions/supportFunctions.rb' 
+require './functions/support_functions/error_messages.rb'
+require './functions/support_functions/product_category.rb' 
+require './functions/support_functions/support_functions.rb' 
 
 #######################      Master Function to Determine appropriate Data Category function       ##########################
 

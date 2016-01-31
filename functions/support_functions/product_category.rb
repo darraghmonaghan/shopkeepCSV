@@ -1,5 +1,5 @@
 
-require './Functions/Product/CSVtoJSON.rb' 
+require './functions/product/CSV_to_JSON.rb' 
 
 ######################      Data Category Function       ##########################
 

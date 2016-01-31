@@ -1,5 +1,5 @@
 
-require './Functions/SupportFunctions/supportFunctions.rb'         
+require './functions/support_functions/support_functions.rb'         
 
 
 describe "#string_to_integer" do

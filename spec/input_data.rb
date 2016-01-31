@@ -1,6 +1,6 @@
 
 
-require './Functions/SupportFunctions/checkInputData.rb'           
+require './functions/support_functions/check_input_data.rb'           
 
 
 describe "#check_input_data" do
