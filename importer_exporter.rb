@@ -7,10 +7,9 @@ require './functions/support_functions/check_input_data.rb'   	## do not touch
 ##############################################################################################
 
 ### Conversion Type           Options: 'Product' (Eventually "Customer" and "Transaction" will be added)
-### Import File               Enter target import file path name - Ensure target document exists
-### Export File               Enter target export file path name - Ensure target document exists
-### Input Format              Enter format of target import file - Options: 'CSV'  (Eventually 'XML', 'JSON')
-### Export Format             Enter format of target export file - Options: 'JSON' (Eventually 'CSV', 'XML')
+### Target Import File        Enter target import file path name - Ensure target document exists
+### Target Export File        Enter target export file path name - Ensure target document exists
+
 
 
 

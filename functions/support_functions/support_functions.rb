@@ -4,10 +4,14 @@ require './functions/support_functions/error_messages.rb'
 #######################         Supporting Functions        ##########################
 
 		def check_formatting(input)
-			if input.class == Fixnum || input.class == Float
+			if input.class == Float || input.class == Fixnum
 				return nil
-			else
+			end
+
+			if input[0] == '$'
 				currency_to_integer(input)
+			else
+				return nil
 			end
 		end
 

@@ -5,7 +5,7 @@ describe "#check_formatting" do
   it "Checks to ensure data is intended to be a currency, not rogue entries" do
     expect( check_formatting(124567) ).to eq nil
     expect( check_formatting(0000111223) ).to eq nil 
-    expect( check_formatting(0.00111223) ).to eq nil 
+    expect( check_formatting(0.0111223) ).to eq nil 
   end
 end
 
