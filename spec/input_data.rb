@@ -5,6 +5,18 @@ require './functions/support_functions/check_input_data.rb'
 
 describe "#check_input_data" do
   it "throws an error if target import file is invalid / does not exist" do
+    expect( check_input_data('Pizza', './target_import_file.csv', './target_export_file.json') ).to eq "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
+    expect( check_input_data(true, './target_import_file.csv', './target_export_file.json') ).to eq "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
+    expect( check_input_data(false, './target_import_file.csv', './target_export_file.json') ).to eq "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
+    expect( check_input_data(123, './target_import_file.csv', './target_export_file.json') ).to eq "Error: Please check the category of conversion you wish to make, valid options are - Customer, Product and Transaction"
+  end
+
+  it "throws an error if target import file & target export file are of the same format" do
+    expect( check_input_data('Customer', './target_import_file.csv', './target_import_file.csv') ).to eq "The format of target import file and target export file match, please reconsider your conversion request"
+    expect( check_input_data('Transaction', './target_import_file.csv', './target_import_file.csv') ).to eq "The format of target import file and target export file match, please reconsider your conversion request"
+  end
+
+  it "throws an error if target import file is invalid / does not exist" do
     expect( check_input_data('Transaction', 123, './README.md') ).to eq "Error: Either target import or export file is invalid, please check that file exists and path is correct"
     expect( check_input_data('Transaction', true, './README.md') ).to eq "Error: Either target import or export file is invalid, please check that file exists and path is correct"
     expect( check_input_data('Transaction', false, './README.md') ).to eq "Error: Either target import or export file is invalid, please check that file exists and path is correct"
@@ -16,21 +28,5 @@ describe "#check_input_data" do
     expect( check_input_data("Transaction", './README.md', true) ).to eq "Error: Either target import or export file is invalid, please check that file exists and path is correct"
     expect( check_input_data("Transaction", './README.md', false) ).to eq "Error: Either target import or export file is invalid, please check that file exists and path is correct"
     expect( check_input_data("Customer", './README.md', './thisFileDoesNotExist.csv') ).to eq "Error: Either target import or export file is invalid, please check that file exists and path is correct" 
-  end
-
-  it "throws an error if format of import data is invalid" do
-    expect( check_input_data('Product', './target_export_file.json', './README.md') ).to eq "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
-    expect( check_input_data('Product', './target_export_file.json', './README.md') ).to eq "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."   
-    expect( check_input_data('Product', './target_export_file.json', './README.md') ).to eq "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
-    expect( check_input_data('Product', './target_export_file.json', './README.md') ).to eq "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."
-    expect( check_input_data('Product', './target_export_file.json', './README.md') ).to eq "Error: Incorrect data type for imported data - valid types are 'XML', 'CSV' or 'JSON'."    
-  end
-
-  it "throws an error if format of export data is invalid" do
-    expect( check_input_data('Product', './README.md', './target_export_file.json') ).to eq "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
-    expect( check_input_data('Product', './README.md', './target_export_file.json') ).to eq "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'." 
-    expect( check_input_data('Product', './README.md', './target_export_file.json') ).to eq "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
-    expect( check_input_data('Product', './README.md', './target_export_file.json') ).to eq "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."
-    expect( check_input_data('Product', './README.md', './target_export_file.json') ).to eq "Error: Incorrect data type for exported data - valid types are 'XML', 'CSV' or 'JSON'."      
   end
 end

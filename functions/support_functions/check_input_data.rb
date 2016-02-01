@@ -17,6 +17,9 @@ def check_input_data(data_category, import_file, export_file)
 	if import_file_checked == false || export_file_checked == false
     	return error(3)
 
+    elsif import_file_format == export_file_format
+        return error(9)
+
 	elsif import_file_format != 'csv' && import_file_format != 'xml' && import_file_format != 'json'
     	return error(5)
 

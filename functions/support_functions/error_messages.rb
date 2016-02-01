@@ -18,5 +18,7 @@
 				p "Error: The system is not currently able to convert data relating to Transactions"
 			elsif number == 8
 				p "Mismatch between stated file format and format of target import / export file"
+			elsif number == 9
+				p "The format of target import file and target export file match, please reconsider your conversion request"
 			end
 		end
